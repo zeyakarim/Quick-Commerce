@@ -1,5 +1,5 @@
 
-// import {nextui} from "@nextui-org/react";
+// const {heroui} = require("@heroui/react");
 
 module.exports = {
     content: [
@@ -29,5 +29,5 @@ module.exports = {
         },
         },
     },
-//   plugins: [nextui()],
+//   plugins: [heroui()],
 };
