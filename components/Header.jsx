@@ -5,7 +5,7 @@ import TopHeader from './TopHeader';
 
 const Header = () => {
     return (
-        <div className='w-full flex flex-col'>
+        <div className='w-full flex flex-col border-b-1 border-[#d1d5dc]'>
             <TopHeader />
             <CompaniesToggle />
         </div>

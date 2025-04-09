@@ -25,12 +25,12 @@ export default function RootLayout({ children }) {
       <body>
         <div className="flex">
           {/* LEFT NAVBAR */}
-          <aside className="w-[13%] md:w-[8%] lg:w-[13%]">
+          <aside className="w-[18%]">
             <Navbar />
           </aside>
           
           {/* RIGHT CONTENT AREA */}
-          <main className="w-[87%] md:w-[92%] lg:w-[87%] bg-white flex flex-col">
+          <main className="w-[82%] bg-white flex flex-col">
             {/* <Header /> */}
             {children}
             {/* <Analytics /> */}
