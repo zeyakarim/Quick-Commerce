@@ -15,7 +15,6 @@ const TopHeader = () => {
                         alt='line-chart'
                         width={16}
                         height={16}
-
                     />
                     <SwitchComponent size="sm" />
                 </div>
