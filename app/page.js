@@ -5,7 +5,7 @@ import TopCitiesChartCard from "@/components/TopCitiesChartCard";
 
 export default function Home() {
   return (
-    <div className='m-2 flex flex-col border-gray-300 border-1 rounded-md bg-[#FAFAFA] gap-5 overflow-hidden'>
+    <div className='m-2 flex flex-col border-gray-300 border-1 rounded-md bg-[#FAFAFA] gap-5'>
       <Header />
 
       <div className="w-full flex flex-row gap-4 px-5">
