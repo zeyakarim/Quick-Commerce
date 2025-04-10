@@ -1,232 +1,103 @@
-'use client'
+'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { ExpandLess, ExpandMore, Collections, Home, LiveTv } from '@mui/icons-material';
-import { Box, CssBaseline, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Collapse } from '@mui/material';
 
-const drawerWidth = 240;
+import { ExpandLess, ExpandMore, Collections, Home, LiveTv, ChevronRight, UnfoldMore, KeyboardDoubleArrowLeft } from '@mui/icons-material';
 
-const NAVIGATION = [
+const navbarItems = [
     {
         segment: 'overview',
         title: 'Overview',
-        icon: <Home />,
+        icon: <Home style={{fontSize:'20px'}} />
     },
     {
         segment: 'channels',
         title: 'Channels',
-        icon: <LiveTv />,
+        icon: <LiveTv style={{fontSize:'20px'}} />,
         children: [
-            {
-                segment: 'metaads',
-                title: 'Meta Ads'
-            },
-            {
-                segment: 'googleads',
-                title: 'Google Ads'
-            },
-            {
-                segment: 'quickcommerce',
-                title: 'Quick Commerce'
-            },
+            { segment: 'metaads', title: 'Meta Ads' },
+            { segment: 'googleads', title: 'Google Ads' },
+            { segment: 'quickcommerce', title: 'Quick Commerce' },
         ],
     },
     {
         segment: 'creatives',
         title: 'Creatives',
-        icon: <Collections />,
+        icon: <Collections style={{fontSize:'20px'}} />
     },
 ];
 
-const theme = createTheme({
-    breakpoints: {
-        values: {
-            xs: 0,
-            sm: 600,
-            md: 900,
-            lg: 1200,
-            xl: 1536,
-        },
-    },
-    palette: {
-        primary: {
-            main: '#1976d2',
-        },
-            background: {
-            default: '#f5f5f5',
-        },
-    },
-});
-
-const Skeleton = styled('div')(({ theme }) => ({
-    backgroundColor: theme.palette.action.hover,
-    borderRadius: theme.shape.borderRadius,
-    width: '100%',
-}));
-
-const DashboardContainer = styled('div')(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(3),
-    width: '100%',
-    padding: theme.spacing(3),
-}));
-
-const Row = styled('div')(({ theme }) => ({
-    display: 'flex',
-    gap: theme.spacing(3),
-    width: '100%',
-    flexWrap: 'wrap',
-    [theme.breakpoints.down('sm')]: {
-        flexDirection: 'column',
-        gap: theme.spacing(2),
-    },
-}));
-
-const Column = styled('div')(({ width, theme }) => ({
-    flex: width ? `0 0 calc(${width} - ${theme.spacing(3)})` : '1',
-    minWidth: '200px',
-    [theme.breakpoints.down('sm')]: {
-        flex: '1 0 100%',
-    },
-}));
-
-const Navbar = () => {
+export default function Navbar() {
     const router = useRouter();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [openItems, setOpenItems] = useState({});
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
+    const toggleMobile = () => setMobileOpen(!mobileOpen);
 
-    const handleItemClick = (segment) => {
-        setOpenItems(prev => ({ ...prev, [segment]: !prev[segment] }));
+    const handleItemClick = (segment, hasChildren) => {
+        if (hasChildren) {
+            setOpenItems((prev) => ({
+                ...prev,
+                [segment]: !prev[segment],
+            }));
+        } else {
+            router.push(`/${segment}`);
+            setMobileOpen(false); // close drawer on mobile
+        }
     };
-
-    const drawer = (
-        <div>
-            <Toolbar />
-            <List>
-                {NAVIGATION.map((item) => (
-                    <div key={item.segment}>
-                        <ListItem disablePadding>
-                            <ListItemButton 
-                                onClick={() => item.children ? handleItemClick(item.segment) : router.push(`/${item.segment}`)}
-                            >
-                                <ListItemIcon>{item.icon}</ListItemIcon>
-                                <ListItemText primary={item.title} />
-                                {item.children && (openItems[item.segment] ? <ExpandLess /> : <ExpandMore />)}
-                            </ListItemButton>
-                        </ListItem>
-                        {item.children && (
-                            <Collapse in={openItems[item.segment]} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
-                                    {item.children.map((child) => (
-                                        <ListItem key={child.segment} disablePadding>
-                                            <ListItemButton 
-                                                sx={{ pl: 4 }} 
-                                                onClick={() => router.push(`/${child.segment}`)}
-                                            >
-                                                <ListItemIcon>{child.icon}</ListItemIcon>
-                                                <ListItemText primary={child.title} />
-                                            </ListItemButton>
-                                        </ListItem>
-                                    ))}
-                                </List>
-                            </Collapse>
-                        )}
-                    </div>
-                ))}
-            </List>
-        </div>
-    );
 
     return (
-        <ThemeProvider theme={theme}>
-            <Box sx={{ display: 'flex' }}>
-                <CssBaseline />
-                <Box
-                    component="nav"
-                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                >
-                    <Drawer
-                        variant="temporary"
-                        open={mobileOpen}
-                        onClose={handleDrawerToggle}
-                        ModalProps={{ keepMounted: true }}
-                        sx={{
-                            display: { xs: 'block', sm: 'none' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                        }}
-                    >
-                        {drawer}
-                    </Drawer>
-                    <Drawer
-                        variant="permanent"
-                        sx={{
-                            display: { xs: 'none', sm: 'block' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                        }}
-                        open
-                    >
-                        {drawer}
-                    </Drawer>
-                </Box>
-                <Box
-                    component="main"
-                    sx={{ 
-                        flexGrow: 1,
-                        p: 3,
-                        width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    }}
-                >
-                    {/* <Toolbar /> */}
-                    <DashboardContainer>
-                        <Row>
-                            <Column width="66.66%">
-                                <Skeleton sx={{ height: 300 }} />
-                            </Column>
-                            <Column width="33.33%">
-                                <Skeleton sx={{ height: 300 }} />
-                            </Column>
-                        </Row>
-
-                        <Row>
-                            <Column width="25%">
-                                <Skeleton sx={{ height: 150 }} />
-                            </Column>
-                            <Column width="25%">
-                                <Skeleton sx={{ height: 150 }} />
-                            </Column>
-                            <Column width="25%">
-                                <Skeleton sx={{ height: 150 }} />
-                            </Column>
-                            <Column width="25%">
-                                <Skeleton sx={{ height: 150 }} />
-                            </Column>
-                        </Row>
-
-                        <Row>
-                            <Column>
-                                <Skeleton sx={{ height: 400 }} />
-                            </Column>
-                        </Row>
-
-                        <Row>
-                            <Column width="50%">
-                                <Skeleton sx={{ height: 250 }} />
-                            </Column>
-                            <Column width="50%">
-                                <Skeleton sx={{ height: 250 }} />
-                            </Column>
-                        </Row>
-                    </DashboardContainer>
-                </Box>
-            </Box>
-        </ThemeProvider>
+        <div className="flex">
+            {/* Sidebar */}
+            <div
+                className={`fixed z-40 flex flex-col gap-2 w-full h-full p-4 transform transition-transform duration-300 ease-in-out 
+                ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} 
+                sm:translate-x-0 sm:static`}
+            >
+                <div className='flex items-center gap-2'>
+                    <div className='flex items-center justify-between gap-2 border-gray-300 border-1 p-1 rounded-lg w-[90%]'>
+                        <div className='flex items-center gap-2'>
+                            <p className='bg-[#309E96] p-1 rounded-md text-xs text-white'>SS</p>
+                            <p className='text-sm font-semibold'>Test_brand</p>
+                        </div>
+                        <UnfoldMore style={{fontSize:'20px'}} />
+                    </div>
+                    <KeyboardDoubleArrowLeft style={{fontSize:'20px'}} />
+                </div>
+                <div className='bg-[#F8F8F8] h-full'>
+                    {navbarItems?.map((item) => (
+                        <div key={item.segment} >
+                            <div
+                                onClick={() => handleItemClick(item.segment, !!item.children)}
+                                className="flex flex-row justify-between items-center cursor-pointer p-2 rounded hover:bg-[#DFEAE8] hover:text-[#027056]"
+                            >
+                                <div className='flex flex-row items-center gap-2'>
+                                    <p>{item?.icon}</p>
+                                    <p className='text-sm'>{item.title}</p>
+                                </div>
+                                {item.children && (
+                                    <span className="text-sm">
+                                        {openItems[item.segment] ? <ExpandMore /> : <ChevronRight /> }
+                                    </span>
+                                )}
+                            </div>
+                            {item.children && openItems[item.segment] && (
+                                <div className="ml-4 mt-1 space-y-1">
+                                    {item.children.map((child) => (
+                                        <div
+                                            key={child.segment}
+                                            onClick={() => handleItemClick(child.segment, false)}
+                                            className="cursor-pointer text-sm p-2 rounded hover:bg-[#DFEAE8] hover:text-[#027056]"
+                                        >
+                                            {child.title}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }
-
-export default Navbar;
