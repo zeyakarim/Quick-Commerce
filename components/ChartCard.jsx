@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { Card, Typography, Box } from '@mui/material';
+import { Card } from '@mui/material';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { ArrowUpward, HelpOutline } from '@mui/icons-material';
 
@@ -17,59 +17,37 @@ const data = [
 const SalesChartCard = ({title}) => {
   return (
     <Card sx={{ 
-        borderRadius: '12px', 
-        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
-        width: '100%',
-        maxWidth: '33%',
+      borderRadius: '12px', 
+      boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
+      width: '100%',
+      maxWidth: '33%',
     }}>
       {/* Header */}
-      <div className='flex flex-row justify-between p-4 border-b-gray-300 border-b-1'>
-        <Typography variant="h6" sx={{ 
-            fontWeight: 600, 
-            fontSize: '16px',
-            color: '#333',
-            mb: 0,
-            p: 0, 
-        }}>
-            {title}
-        </Typography>
-        <HelpOutline style={{fontSize:'20px'}} />
+      <div className='flex flex-row justify-between p-4 border-b border-gray-300'>
+        <p className="font-semibold text-[15px] text-[#515153] m-0 p-0">
+          {title}
+        </p>
+        <HelpOutline sx={{ fontSize: '20px', color: '#999' }} />
       </div>
       
       {/* Sales Figures */}
-      <Box sx={{ display: 'flex', justifyContent:'space-between', alignItems: 'baseline', gap: '8px', mb: 3, pr:2, pl:2, pt:2 }}>
-        <Typography variant="h4" sx={{ 
-          fontWeight: 700, 
-          fontSize: '28px',
-          color: '#111',
-          display:'flex',
-          margin:'auto 0px'
-        }} className='my-auto'>
+      <div className="flex justify-between items-baseline gap-2 mb-3 px-4 pt-4">
+        <p className="font-semibold text-[26px] text-gray-900 flex my-auto">
           125.49
-        </Typography>
+        </p>
         <div>
-            <Typography variant="body2" sx={{ 
-            fontSize: '14px',
-            color: '#027056',
-            display: 'flex',
-            justifyContent:'end',
-            fontWeight:600,
-            gap:'6px'
-            }}>
-                <ArrowUpward style={{fontSize:'20px'}} className='my-auto' />
+          <div className="flex justify-end items-center gap-1.5 text-sm font-semibold text-green-700">
+            <ArrowUpward sx={{ fontSize: '16px'}} />
             2.4%
-            </Typography>
-            <Typography variant="body2" sx={{ 
-            fontSize: '14px',
-            color: '#666'
-            }}>
+          </div>
+          <div className="text-sm text-gray-500">
             vs 119.69 last month
-            </Typography>
+          </div>
         </div>
-      </Box>
+      </div>
 
       {/* Chart */}
-      <Box sx={{ height: '240px', p:2, pr:0 }} className='border-b-gray-300 border-b-1'>
+      <div className="h-[248px] border-b border-gray-300">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
@@ -109,40 +87,28 @@ const SalesChartCard = ({title}) => {
               fill="#fff" 
               fillOpacity={0}
               strokeWidth={2}
-              strokeDasharray="5 5" // This makes the line dotted
+              strokeDasharray="5 5"
               dot={false}
             />
           </AreaChart>
         </ResponsiveContainer>
-      </Box>
+      </div>
 
       {/* Legend */}
-      <Box sx={{ display: 'flex', gap: '16px', p:2 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ 
-            width: '8px', 
-            height: '8px', 
-            backgroundColor: '#027056', 
-            borderRadius: '50%',
-            mr: 1 
-          }} />
-          <Typography variant="body2" sx={{ fontSize: '12px', color: '#666' }}>
+      <div className="flex gap-4 p-4">
+        <div className="flex items-center">
+          <div className="w-2 h-2 bg-green-700 rounded-full mr-1" />
+          <p className="text-sm text-gray-500">
             This Month
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ 
-            width: '8px', 
-            height: '8px', 
-            backgroundColor: '#E0663D', 
-            borderRadius: '50%',
-            mr: 1 
-          }} />
-          <Typography variant="body2" sx={{ fontSize: '12px', color: '#666' }}>
+          </p>
+        </div>
+        <div className="flex items-center">
+          <div className="w-2 h-2 bg-orange-500 rounded-full mr-1" />
+          <p className="text-sm text-gray-500">
             Last Month
-          </Typography>
-        </Box>
-      </Box>
+          </p>
+        </div>
+      </div>
     </Card>
   );
 };

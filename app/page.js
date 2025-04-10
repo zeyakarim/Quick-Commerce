@@ -1,5 +1,6 @@
 import SalesChartCard from "@/components/ChartCard";
 import Header from "@/components/Header";
+import TopCitiesChartCard from "@/components/TopCitiesChartCard";
 
 export default function Home() {
   return (
@@ -10,6 +11,8 @@ export default function Home() {
         <SalesChartCard title='Sales (MRP)' />
 
         <SalesChartCard title='Total Quantity Sold' />
+
+        <TopCitiesChartCard />
       </div>
     </div>
   );
