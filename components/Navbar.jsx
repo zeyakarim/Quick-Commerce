@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ExpandLess, ExpandMore, Collections, Home, LiveTv, ChevronRight, UnfoldMore, KeyboardDoubleArrowLeft, HelpOutline, Settings, PeopleOutline } from '@mui/icons-material';
+import { ExpandMore, Collections, Home, LiveTv, ChevronRight, UnfoldMore, KeyboardDoubleArrowLeft, HelpOutline, Settings, PeopleOutline, Add } from '@mui/icons-material';
 import Image from 'next/image';
 
 const navbarItems = [
@@ -41,7 +41,8 @@ const settingItems = [
 const brandsNavbar = [ 
     { icon: '/perfora.png', name: 'Perfora', borderColor:'#139C53' },
     { icon: '/mamaearth.png', name: 'Mamaearth', borderColor:'lightgray' },
-    { icon: '/boat.jpg', name: 'Boat' }
+    { icon: '/boat.jpg', name: 'Boat' },
+
 ]
 
 export default function Navbar() {
@@ -73,9 +74,11 @@ export default function Navbar() {
                             height={70}
                             width={70}
                             style={{ borderColor: brand?.borderColor }}
-                            className='rounded-lg border-2'
+                            className='rounded-xl border-2'
                         />
                     ))}
+
+                    <Add style={{fontSize:'42px'}} className='text-[#139C53] border-1 rounded-xl border-[lightgray] p-2' />
                 </div>
 
                 <div className='flex flex-col items-center gap-2'>

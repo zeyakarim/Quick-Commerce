@@ -4,77 +4,77 @@ import Image from 'next/image';
 import React, { Fragment } from 'react';
 
 const TrendIndicator = ({ value }) => (
-  <span className="inline-flex items-center text-green-600 text-sm">
-    <ArrowUpward sx={{ fontSize: '14px', marginRight: '2px' }} />
-    {value}
-  </span>
+    <span className="inline-flex items-center text-green-600 text-sm">
+        <ArrowUpward sx={{ fontSize: '14px', marginRight: '2px' }} />
+        {value}
+    </span>
 );
 
 const tableData = [
-  {
-    sku: 'Protein Bar 100g',
-    sales: '₹93,132.12',
-    outOfStock: '1.68%',
-    totalInventory: '931.9',
-    avgRank: '3.2',
-    visibility: '12,303',
-    impressions: '25,005',
-    checked: true
-  },
-  {
-    sku: 'Choco Bar 100g',
-    isParent: true,
-    checked: true,
-    children: [
-      {
-        sales: '₹8,526.32',
-        outOfStock: '6.79%',
-        totalInventory: '679',
-        avgRank: '7',
-        visibility: '3,005',
-        impressions: '4,231'
-      },
-      {
-        sales: '₹7,012.72',
-        outOfStock: '3.28%',
-        totalInventory: '328',
-        avgRank: '4',
-        visibility: '2,960',
-        impressions: '3,800'
-      },
-    ]
-  },
-  {
-    sku: 'SKU 3',
-    sales: '₹931.3',
-    outOfStock: '1.68%',
-    totalInventory: '931.9',
-    avgRank: '11',
-    visibility: '1,931.9',
-    impressions: '₹931.9',
-    checked: false
-  },
-  {
-    sku: 'SKU 4',
-    sales: '₹0',
-    outOfStock: '0%',
-    totalInventory: '0',
-    avgRank: '0',
-    visibility: '₹0',
-    impressions: '₹0',
-    checked: false
-  },
-  {
-    sku: 'Total',
-    sales: '₹2,93,132.12',
-    outOfStock: '16%',
-    totalInventory: '2,931',
-    avgRank: '8.3',
-    visibility: '61,985',
-    impressions: '₹2,61,768',
-    isTotal: true,
-    checked: false
-  }
+    {
+        sku: 'Protein Bar 100g',
+        sales: '₹93,132.12',
+        outOfStock: '1.68%',
+        totalInventory: '931.9',
+        avgRank: '3.2',
+        visibility: '12,303',
+        impressions: '25,005',
+        checked: true
+    },
+    {
+        sku: 'Choco Bar 100g',
+        isParent: true,
+        checked: true,
+        children: [
+            {
+                sales: '₹8,526.32',
+                outOfStock: '6.79%',
+                totalInventory: '679',
+                avgRank: '7',
+                visibility: '3,005',
+                impressions: '4,231'
+            },
+            {
+                sales: '₹7,012.72',
+                outOfStock: '3.28%',
+                totalInventory: '328',
+                avgRank: '4',
+                visibility: '2,960',
+                impressions: '3,800'
+            },
+        ]
+    },
+    {
+        sku: 'SKU 3',
+        sales: '₹931.3',
+        outOfStock: '1.68%',
+        totalInventory: '931.9',
+        avgRank: '11',
+        visibility: '1,931.9',
+        impressions: '₹931.9',
+        checked: false
+    },
+    {
+        sku: 'SKU 4',
+        sales: '₹0',
+        outOfStock: '0%',
+        totalInventory: '0',
+        avgRank: '0',
+        visibility: '₹0',
+        impressions: '₹0',
+        checked: false
+    },
+    {
+        sku: 'Total',
+        sales: '₹2,93,132.12',
+        outOfStock: '16%',
+        totalInventory: '2,931',
+        avgRank: '8.3',
+        visibility: '61,985',
+        impressions: '₹2,61,768',
+        isTotal: true,
+        checked: false
+    }
 ];
 
 const AvailabilityTable = ({ title }) => {
